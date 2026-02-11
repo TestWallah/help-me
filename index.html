@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sankalp Help Portal</title>
+    <style>
+        /* --- General Reset & Fonts --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); /* Deep professional dark theme */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* --- Main Container Card --- */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- 3D Button Styles --- */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn-3d {
+            position: relative;
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.1s;
+            text-decoration: none; /* For links */
+            display: inline-block;
+        }
+
+        /* Button 1: Topper Copy (Greenish/Teal) */
+        .btn-topper {
+            background: #00b894;
+            box-shadow: 0 6px 0 #00876c;
+        }
+
+        .btn-topper:active {
+            box-shadow: 0 2px 0 #00876c;
+            transform: translateY(4px);
+        }
+
+        /* Button 2: Help Buying (Orange/Red) */
+        .btn-help {
+            background: #ff7675;
+            box-shadow: 0 6px 0 #d63031;
+        }
+
+        .btn-help:active {
+            box-shadow: 0 2px 0 #d63031;
+            transform: translateY(4px);
+        }
+
+        /* Sub Button: Support (Blue) */
+        .btn-support {
+            background: #0984e3;
+            box-shadow: 0 6px 0 #0652dd;
+        }
+        .btn-support:active {
+            box-shadow: 0 2px 0 #0652dd;
+            transform: translateY(4px);
+        }
+
+        /* Sub Button: Amazon (Yellow/Gold) */
+        .btn-amazon {
+            background: #f1c40f;
+            box-shadow: 0 6px 0 #f39c12;
+            color: #2c3e50; /* Dark text for contrast */
+        }
+        .btn-amazon:active {
+            box-shadow: 0 2px 0 #f39c12;
+            transform: translateY(4px);
+        }
+
+        /* Back Button (Simple) */
+        .btn-back {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 14px;
+            color: #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn-back:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        /* --- Animation Classes --- */
+        .hidden {
+            display: none;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Icons (Using simple emoji for speed, no external font needed) */
+        .icon {
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>विद्यार्थी सहायता पोर्टल</h1>
+        
+        <!-- Main Menu -->
+        <div id="main-menu" class="btn-container fade-in">
+            <button class="btn-3d btn-topper" onclick="openTopperCopy()">
+                <span class="icon">📝</span> टॉपर कॉपी डाउनलोड
+            </button>
+            
+            <button class="btn-3d btn-help" onclick="showHelpOptions()">
+                <span class="icon">🆘</span> बैच खरीदने में मदद
+            </button>
+        </div>
+
+        <!-- Sub Menu (Hidden initially) -->
+        <div id="sub-menu" class="btn-container hidden">
+            <p style="margin-bottom: 15px; color: #ddd; font-size: 14px;">कृपया एक विकल्प चुनें:</p>
+
+            <button class="btn-3d btn-support" onclick="openSupportLink()">
+                <span class="icon">🤝</span> सहयोग दें (Support Me)
+            </button>
+            
+            <button class="btn-3d btn-amazon" onclick="sendGiftCard()">
+                <span class="icon">🎁</span> अमेज़न गिफ्ट कार्ड दें
+            </button>
+
+            <button class="btn-back" onclick="goBack()">
+                ⬅ वापस मुख्य मेनू (Back)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Functions Logic ---
+
+        // 1. Open Topper Copy Link
+        function openTopperCopy() {
+            // New tab me link open karega
+            window.open('https://shrinkme.click/G0CLPtnh', '_blank');
+        }
+
+        // 2. Show Sub Options (Hide Main, Show Sub)
+        function showHelpOptions() {
+            const mainMenu = document.getElementById('main-menu');
+            const subMenu = document.getElementById('sub-menu');
+
+            mainMenu.style.display = 'none'; // Hide main
+            subMenu.style.display = 'flex';  // Show sub
+            subMenu.classList.add('fade-in'); // Add animation
+        }
+
+        // 3. Go Back to Main Menu
+        function goBack() {
+            const mainMenu = document.getElementById('main-menu');
+            const subMenu = document.getElementById('sub-menu');
+
+            subMenu.style.display = 'none';
+            mainMenu.style.display = 'flex';
+            mainMenu.classList.add('fade-in');
+        }
+
+        // 4. Support Me Link
+        function openSupportLink() {
+            window.open('https://shrinkme.click/G0CLPtnh', '_blank');
+        }
+
+        // 5. Send Amazon Gift Card (Mailto)
+        function sendGiftCard() {
+            const email = "www.sankalp.in@gmail.com";
+            const subject = "Gift Card Support for Batch";
+            const body = "नमस्ते, यहाँ मेरा Amazon Gift Card Code है: \n\n[यहाँ कोड लिखें/Paste Code Here]\n\nधन्यवाद!";
+            
+            // Mail client open karega auto-fill message ke saath
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+    </script>
+</body>
+</html>
+
